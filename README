@@ -3,6 +3,8 @@ A small sinatra app for crowd sourcing a mapping between BIC and BISAC subjects.
 Launch the app using standard sinatra tools. I'm not expecting anyone to use this 
 but me, so that's all the documentation you're getting.
 
+Why subjct? Because all good webapps should be missign a vowel.
+
 = DB Schema
 
 DB schema has three tables and is defined below. Populate it with seed data
