@@ -1,0 +1,44 @@
+A small sinatra app for crowd sourcing a mapping between BIC and BISAC subjects.
+
+Launch the app using standard sinatra tools. I'm not expecting anyone to use this 
+but me, so that's all the documentation you're getting.
+
+= DB Schema
+
+DB schema has three tables and is defined below. Populate it with seed data
+by running importer.rb.
+
+  CREATE TABLE IF NOT EXISTS `bic_subjects` (
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `code` varchar(8) COLLATE utf8_unicode_ci NOT NULL,
+      `description` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+      PRIMARY KEY (`id`),
+      KEY `code` (`code`)
+      ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+
+  CREATE TABLE IF NOT EXISTS `bisac_subjects` (
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `code` varchar(8) COLLATE utf8_unicode_ci NOT NULL,
+      `description` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+      PRIMARY KEY (`id`),
+      KEY `code` (`code`)
+      ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+
+  CREATE TABLE IF NOT EXISTS `connections` (
+      `bic_subject_id` int(11) NOT NULL,
+      `bisac_subject_id` int(11) NOT NULL,
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `by` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
+      PRIMARY KEY (`id`),
+      KEY `bic_subject_id` (`bic_subject_id`,`bisac_subject_id`)
+      ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+
+= License
+
+This app is distributed under the terms of the MIT License. See the included file for
+more detail.
+
+= Further Reading
+
+- BIC Subjects http://www.bic.org.uk/7/Subject-Categories/
+- BISAC Subjects http://www.bisg.org/what-we-do-20-73-bisac-subject-headings-2008-edition.php

@@ -1,0 +1,6 @@
+adapter: mysql
+database: dbname
+username: 
+password: 
+socket: /var/run/mysqld/mysqld.sock
+encoding: utf8

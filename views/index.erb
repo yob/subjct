@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+    <title>Subjct</title>
+  </head>
+  <body>
+    <% if session["notice"]%>
+      <p id="notice"><%=session["notice"] %></p>
+    <% end %>
+    <h1>Subjct</h1>
+    <p>There are <%=@connection_count%> connections defined. <a href="/connections.csv">Download a CSV</a>.</p>
+    <p>There are <%=@bic_count%> BIC v2 subjects. <a href="/bic_subjects.csv">Download a CSV</a>.</p>
+    <p>There are <%=@bisac_count%> BISAC subjects. <a href="/bisac_subjects.csv">Download a CSV</a>.</p>
+
+    <div id="forms">
+      <form action="/by" method="post">
+        <label>Name (optional):
+          <input type="text" name="by" value="<%=session["by"]%>" />
+        </label>
+        <input type="submit" value="submit" />
+      </form>
+
+      <form action="/connections" method="post">
+        <fieldset>
+          <label>BIC:
+            <select name="bic_subject_id">
+              <%@bic_subjects.each do |bic|%>
+                <option value="<%=bic.id%>"><%=bic.code%> - <%=bic.description%></option>
+              <% end %>
+            </select>
+          </label>
+          <label>BISAC:
+            <select name="bisac_subject_id">
+              <%@bisac_subjects.each do |bisac|%>
+                <option value="<%=bisac.id%>"><%=bisac.code%> - <%=bisac.description%></option>
+              <% end %>
+            </select>
+          </label>
+        </fieldset>
+        <fieldset>
+          <input type="submit" value="submit" />
+        </fieldset>
+      </form>
+    </div>
+
+    <div id="footer">
+      <p>Subjct is by <a href="http://yob.id.au">James Healy</a></p>
+    </div>
+  </body>
+</html>
